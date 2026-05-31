@@ -570,3 +570,12 @@
                 card.innerHTML = `
                     <div class="product-tag">${tag}</div>
                     <div style="height:120px; background:#F5EFEB; margin-bottom:15px; border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--primary-color); font-weight:bold;">✨ Image</div>
+button, a, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+    outline: none !important;
+}
+
+button:focus, a:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
