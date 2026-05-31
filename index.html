@@ -1,1 +1,284 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-tag">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passion Nuts | سناكات صحية وفخمة</title>
+    <style>
+        :root {
+            --primary-color: #5C4033; /* بني دافئ مستوحى من اللوغو */
+            --secondary-color: #8A9A5B; /* أخضر طبيعي */
+            --bg-color: #FDFBF7; /* بيج كريمي فخم */
+            --card-bg: #ffffff;
+            --text-main: #3D2B1F;
+        }
 
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        /* الهيدر والتحكم باللغات */
+        header {
+            background-color: var(--card-bg);
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .lang-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* قسم الترحيب */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #F5EFEB, var(--bg-color));
+        }
+
+        .hero h1 {
+            color: var(--primary-color);
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: var(--secondary-color);
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* قسم كود الخصم */
+        .promo-section {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .promo-box {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border: 2px dashed white;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* قائمة الأقسام والتصنيفات */
+        .categories-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .cat-btn {
+            background-color: white;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* شبكة المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border: 1px solid #eee;
+            transition: transform 0.3s;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        /* الأنماط الخاصة باللغة الإنجليزية */
+        .en-mode {
+            direction: ltr !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-text">PASSION NUTS</div>
+        <button class="lang-btn" onclick="toggleLanguage()" id="lang-btn">English</button>
+    </header>
+
+    <section class="hero">
+        <h1 id="hero-title">سناكات صحية وفاخرة</h1>
+        <p id="hero-subtitle">بدون سكر مضاف • بدون زيوت مهدرجة</p>
+    </section>
+
+    <!-- مكان عرض أكواد الخصم والحسومات -->
+    <section class="promo-section">
+        <span id="promo-text">استخدم كود الحسم الإضافي بمناسبة الإطلاق!</span><br>
+        <div class="promo-box">HEALTHY10</div>
+    </section>
+
+    <!-- أقسام الموقع المعتمدة -->
+    <nav class="categories-nav">
+        <button class="cat-btn active" onclick="filterCat('all')" id="cat-all">كل المنتجات</button>
+        <button class="cat-btn" onclick="filterCat('butter')" id="cat-butter">زبدة المكسرات</button>
+        <button class="cat-btn" onclick="filterCat('choco')" id="cat-choco">سناكات مع شوكولا</button>
+        <button class="cat-btn" onclick="filterCat('boxes')" id="cat-boxes">بوكسات</button>
+        <button class="cat-btn" onclick="filterCat('gifts')" id="cat-gifts">هدايا</button>
+        <button class="cat-btn" onclick="filterCat('keto')" id="cat-keto">منتجات كيتو</button>
+        <button class="cat-btn" onclick="filterCat('diabetic')" id="cat-diabetic">أبطال السكري</button>
+    </nav>
+
+    <!-- عرض المنتجات -->
+    <div class="products-grid" id="products-container">
+        <!-- المنتجات تظهر هنا تلقائياً عبر الجافاسكريبت بالأسفل -->
+    </div>
+
+    <script>
+        // ==========================================
+        //  قسم التعديل السريع: يمكنك تعديل المنتجات، الأسماء والأسعار من هنا بسهولة
+        // ==========================================
+        const productsData = [
+            {
+                id: 1,
+                category: 'butter',
+                tagAr: 'طبيعي', tagEn: 'Natural',
+                titleAr: 'زبدة الفستق الفاخرة', titleEn: 'Premium Peanut Butter',
+                priceAr: '٥٠ رس', priceEn: '50 SAR'
+            },
+            {
+                id: 2,
+                category: 'choco',
+                tagAr: 'خالي من السكر', tagEn: 'Sugar Free',
+                titleAr: 'كرات اللوز بالشوكولاتة الداكنة', titleEn: 'Dark Choco Almond Balls',
+                priceAr: '٦٥ رس', priceEn: '65 SAR'
+            },
+            {
+                id: 3,
+                category: 'keto',
+                tagAr: 'كيتو صديق', tagEn: 'Keto Friendly',
+                titleAr: 'جرانولا الكيتو الفاخرة', titleEn: 'Premium Keto Granola',
+                priceAr: '٨0 رس', priceEn: '80 SAR'
+            },
+            {
+                id: 4,
+                category: 'boxes',
+                tagAr: 'توفير', tagEn: 'Saving',
+                titleAr: 'بوكس السناكات الأسبوعي', titleEn: 'Weekly Snack Box',
+                priceAr: '١٢٠ رس', priceEn: '120 SAR'
+            },
+            {
+                id: 5,
+                category: 'diabetic',
+                tagAr: 'آمن للسكري', tagEn: 'Diabetic Safe',
+                titleAr: 'مكسرات مشكلة منخفضة المؤشر الجلايسيمي', titleEn: 'Low GI Mixed Nuts',
+                priceAr: '٤٥ رس', priceEn: '45 SAR'
+            },
+            {
+                id: 6,
+                category: 'gifts',
+                tagAr: 'فاخر', tagEn: 'Luxury',
+                titleAr: 'صندوق هدايا Passion Nuts الفخم', titleEn: 'Passion Nuts Luxury Gift Box',
+                priceAr: '٢٠٠ رس', priceEn: '200 SAR'
+            }
+        ];
+
+        // ==========================================
+        //  البرمجة الداخلية الخاصة بالتبديل والفلترة
+        // ==========================================
+        let currentLang = 'ar';
+
+        const translations = {
+            ar: {
+                title: "سناكات صحية وفاخرة",
+                subtitle: "بدون سكر مضاف • بدون زيوت مهدرجة",
+                promo: "استخدم كود الحسم الإضافي بمناسبة الإطلاق!",
+                all: "كل المنتجات", butter: "زبدة المكسرات", choco: "سناكات مع شوكولا",
+                boxes: "بوكسات", gifts: "هدايا", keto: "منتجات كيتو", diabetic: "أبطال السكري"
+            },
+            en: {
+                title: "Healthy & Luxury Snacks",
+                subtitle: "No Added Sugar • No Hydrogenated Oils",
+                promo: "Use the promo code for an exclusive launch discount!",
+                all: "All Products", butter: "Nut Butter", choco: "Chocolate Snacks",
+                boxes: "Boxes", gifts: "Gifts", keto: "Keto Products", diabetic: "Diabetic Heroes"
+            }
+        };
+
+        function renderProducts(filter = 'all') {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
+            
+            const filtered = filter === 'all' ? productsData : productsData.filter(p => p.category === filter);
+            
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                const tag = currentLang === 'ar' ? p.tagAr : p.tagEn;
+                const title = currentLang === 'ar' ? p.titleAr : p.titleEn;
+                const price = currentLang === 'ar' ? p.priceAr : p.priceEn;
+                
+                card.innerHTML = `
+                    <div class="product-tag">${tag}</div>
+                    <div style="height:120px; background:#F5EFEB; margin-bottom:15px; border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--primary-color); font-weight:bold;">✨ Image</div>
